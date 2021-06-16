@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var gameModel: GameModel
     var myTestList: [GameModel] = [GameModel()]
     var body: some View {
         NavigationView {
             List(myTestList) { game in
-                NavigationLink(destination: GameDetail(game: game)) {
+                NavigationLink(destination: GameDetail().environmentObject(gameModel)) {
                     GameRow(game: game)
                 }
             }
@@ -25,5 +26,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(GameModel())
     }
 }

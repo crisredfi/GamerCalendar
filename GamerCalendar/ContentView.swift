@@ -120,7 +120,7 @@ import SwiftUI
 
 struct ContentView: View {
     let model = CloudModel()
-
+    @EnvironmentObject var gameModel: GameModel
     @EnvironmentObject var listElements: ListElements
     @State private var showEditTextField = false
     
@@ -128,7 +128,8 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List { ForEach(listElements.items) { game in
-                           NavigationLink(destination: GameDetail(game: game)) {
+                    NavigationLink(destination: GameDetail()
+                        .environmentObject(gameModel) ) {
                                GameRow(game: game)
                     }
                 }.onDelete { (set) in
@@ -188,7 +189,9 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
         ContentView()
+            .environmentObject(GameModel())
     }
 }

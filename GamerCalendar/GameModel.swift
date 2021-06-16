@@ -11,7 +11,7 @@ import UIKit
 import CloudKit
 import SwiftUI
 
-class GameModel: Identifiable {
+class GameModel: ObservableObject, Identifiable {
     enum gamePlatform: Int {
         case playstation
         case xbox

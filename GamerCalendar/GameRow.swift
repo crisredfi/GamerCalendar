@@ -14,21 +14,16 @@ struct GameRow: View {
        var body: some View {
 
            HStack {
-            URLImage( game.coverPhoto?.fileURL ?? URL(string: "https://images-na.ssl-images-amazon.com/images/I/81u-wZQV5EL._AC_SL1500_.jpg")! ) { _ in
-                Image("death-stranding-201982112345528_1")
-                .resizable()
+            
+            URLImage(game.coverPhoto?.fileURL ?? URL(string: "https://images-na.ssl-images-amazon.com/images/I/81u-wZQV5EL._AC_SL1500_.jpg")!) { proxy in
+                proxy.image
+                    .resizable()
                     .scaledToFit()
-                    .frame(width: 70.0,
-                    height: 70.0)
-                .clipped()
-                // Use different image for the placeholder
+                    .aspectRatio(contentMode: .fill) // Fill the frame
+                    .clipped()                       // Clip overlaping parts
                 }
-                .scaledToFit()
-                .frame(width: 70.0,
-                       height: 70.0) // Set frame to 150x150
-//                         .clipShape(Circle())
-                         .clipped()
-
+            .frame(width: 70.0, height: 70.0)  // Set frame to 100x100.
+            
                Text(game.title)
                Spacer()
            }
@@ -44,6 +39,6 @@ struct GameRow_Previews: PreviewProvider {
             GameRow(game: GameModel.init())
             GameRow(game: GameModel.init())
           }
-          .previewLayout(.fixed(width: 300, height: 70))
+//          .previewLayout(.fixed(width: 300, height: 70))
       }
 }
